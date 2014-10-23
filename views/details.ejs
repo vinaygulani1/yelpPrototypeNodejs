@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+   <link rel='stylesheet' href='/stylesheets/style.css' />
+
+   <script>
+
+
+   function name(){
+   alert(cat[i].category);
+   alert(allCat);
+   var table=document.getElementById("table");
+	var names = document.createElement("table");
+	names.setAttribute("border", "1")
+	names.setAttribute("id", "myTable");
+	var tr=document.createElement("tr");
+	var td=document.createElement("td");
+	td.innerHTML="List Of All Names in Category";
+	tr.appendChild(td)
+	table.appendChild(tr);
+
+	names.appendChild(tr);
+	table.appendChild(names);
+	
+for(i=0;i<arguments.length;i++){
+	if(arguments[i]===category){
+	var tr=document.createElement("tr");
+	var td1=document.createElement("td");
+	td1.innerHTML=arguments[i].company;
+
+	tr.appendChild(td1);
+
+	names.appendChild(tr);
+	}
+	}
+
+
+   	   }
+  
+   </script>
+   
+   
+</head>
+<body>
+			<div class="app-header simple-header">
+    		<div class="header-container clearfix">
+        			<h1 class="logo">
+        			<a href="/" action="GET">Yelp</a>
+    				</h1> 
+                 	<label style="color:white; text-align: right;margin-left:80%;font-weight: bold;font-size: 15px;"><%= userDetails[0].fname%></label>  
+               		<a method="get" style="color:white;margin-left: 45%; font-weight: bold;margin-left:45%;" href="/reviewSubmission">WriteReview </a>
+                    <label style="text-align:right;color:white;font-weight: bold; margin-left:18%;"> <%= userDetails[0].time %></label>
+    				 <a style="text-align:right;color:white;font-weight: bold; margin-left:80%" href="http://localhost:3300/signout" >Signout</a>	
+         	</div>
+         	</div>
+<% include successLogin.ejs %>
+<!--<table id="table" style = "border-color: blue;border: 3px;margin-left:24px; color:blue; border-width: thick;">
+<tr >
+<td border="2"  >Categories</td>
+</tr>-->
+
+<!--<% for(var i=0;i<cat.length;i++){ %>
+<tr>
+<td><button onclick="name"><%= cat[i].category%></button></td>
+</tr>
+<% } %>-->
+<div style="float: left;">
+<div>
+<h5>Category</h5>
+<form  action="/getNames" method="post">
+<select onchange='this.form.submit()' name="category" id="category">
+
+  <option value="Default" >Select Category</option>
+  <option value="Chinese" >Chinese</option>
+  <option value="Automotive">Automotive</option>
+  <option value="Restaurants" >Restaurants</option>
+  <option value="Food">Food</option>
+  <option value="Health & Medical">Health & Medical</option>
+   <option value="Coffee & Tea">Coffee & Tea</option>
+   <option value="Bars">Bars</option>
+</select>
+</form>
+
+</div style="float left">
+
+<div>
+<h5>Name</h5>
+
+<form  action="/showAllReview" method="post">
+<select onchange='this.form.submit()' name="name1" id="name">
+<option value="Default">Select Name</option>
+<% for(var i=0;i<cat.length;i++){ %>
+<option value="<%= cat[i].name%>" ><%= cat[i].name%></button>
+<% } %>
+</select>
+</form>
+</div>
+</div>
+<div style="margin-left: 50%; background-color: #FCFCFC ">
+
+<hr>
+<br><br>
+
+<h2><p style="color:#a50508; font-weight: bold; font-size: x-large; text-align: center; ">All Selected Category Reviews Below : </p><h2>
+
+<% for(var i=0;i<reviews.length;i++){ %>
+<table>
+<tr>
+<td><label >Name</label></td>
+<td><label  style="color: black;" ><%= reviews[i].name%></label></td>
+</tr>
+
+
+<tr>
+<td><label >Description</label></td>
+<td><label  style="color: black;" > <%= reviews[i].description%></label></td>
+</tr>
+
+<tr>
+<td><label>Rating</label></td>
+<td><label  style="color: black;" ><%= reviews[i].Rating%></label></td>
+</tr>
+
+<tr>
+<td><label  >Reiew</label></td>
+<td><label  style="color: black;" ><%= reviews[i].Review%></label></td>
+</tr>
+
+</table>
+
+
+<br>
+
+<hr>
+<% } %>
+</div>
+
+
+<table id="names">
+
+</table>
+
+
+</body>
+</html>
